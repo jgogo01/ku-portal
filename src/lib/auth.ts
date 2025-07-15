@@ -43,6 +43,9 @@ export const authOptions: NextAuthOptions = {
           campus: profile.campus,
           faculty_id: profile["faculty-id"],
           major_id: profile["major-id"],
+          o365: profile["office365-mail"],
+          google: profile["google-mail"],
+          mail: profile.mail,
         };
       },
     },
@@ -57,6 +60,9 @@ export const authOptions: NextAuthOptions = {
         token.campus = user.campus;
         token.faculty_id = user.faculty_id || null;
         token.major_id = user.major_id || null;
+        token.o365 = user.o365 || null;
+        token.google = user.google || null;
+        token.mail = user.mail || null;
       }
       return token;
     },
@@ -68,6 +74,9 @@ export const authOptions: NextAuthOptions = {
       session.user.campus = token.campus;
       session.user.faculty_id = token.faculty_id || null;
       session.user.major_id = token.major_id || null;
+      session.user.o365 = token.o365 || null;
+      session.user.google = token.google || null;
+      session.user.mail = token.mail || null;
       return session;
     },
 

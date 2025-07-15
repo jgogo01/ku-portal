@@ -11,6 +11,10 @@ declare module "next-auth" {
       
       faculty_id?: string | null;
       major_id?: string | null;
+
+      o365?: string | null;
+      google?: string | null;
+      mail?: string | null;
     } & DefaultSession["user"];
   }
 
@@ -22,6 +26,10 @@ declare module "next-auth" {
     
     faculty_id?: string | null;
     major_id?: string | null;
+
+    o365?: string | null;
+    google?: string | null;
+    mail?: string | null;
   }
 }
 
@@ -34,5 +42,9 @@ declare module "next-auth/jwt" {
 
     faculty_id?: string | null;
     major_id?: string | null;
+
+    o365?: string | null;
+    google?: string | null;
+    mail?: string | null;
   }
 }

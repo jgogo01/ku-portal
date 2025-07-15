@@ -1,12 +1,49 @@
 import { FilterState } from "../types/link";
 import { LinkInterface } from "@/interfaces/Link";
 import { getFavorites } from "./favorites";
+import { Session } from "next-auth";
 
 export const isPublicLink = (link: LinkInterface): boolean => {
   return (
     (!link.campus || link.campus.length === 0) &&
     (!link.type_person || link.type_person.length === 0)
   );
+};
+
+export const createDynamicLink = (link: LinkInterface, session: Session | null): string => {
+  if (!session?.user || !link.url) return link.url || '';
+  
+  let dynamicUrl = link.url;
+  
+  if (dynamicUrl.includes('{{NONTRI}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{NONTRI\}\}/g, session.user.id);
+  }
+  
+  if (dynamicUrl.includes('{{CAMPUS}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{CAMPUS\}\}/g, session.user.campus);
+  }
+  
+  if (dynamicUrl.includes('{{TYPE}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{TYPE\}\}/g, session.user.type_persion);
+  }
+  
+  if (dynamicUrl.includes('{{FACULTY}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{FACULTY\}\}/g, session.user.faculty_id || "");
+  }
+  
+  if (dynamicUrl.includes('{{MAJOR}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{MAJOR\}\}/g, session.user.major_id || "");
+  }
+
+  if (dynamicUrl.includes('{{O365}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{O365\}\}/g, session.user.o365 || "");
+  }
+
+  if (dynamicUrl.includes('{{GOOGLE}}')) {
+    dynamicUrl = dynamicUrl.replace(/\{\{GOOGLE\}\}/g, session.user.google || "");
+  }
+
+  return dynamicUrl;
 };
 
 export const getFilterOptions = (links: LinkInterface[]) => {
@@ -45,7 +82,8 @@ export const getFilterOptions = (links: LinkInterface[]) => {
 export const filterLinks = (
   links: LinkInterface[],
   searchTerm: string,
-  filters: FilterState
+  filters: FilterState,
+  session: Session | null = null
 ): LinkInterface[] => {
   const favorites = getFavorites();
 
@@ -84,8 +122,14 @@ export const filterLinks = (
     );
   });
 
+  // เพิ่ม dynamic URL ให้กับแต่ละ link
+  const linksWithDynamicUrls = filtered.map(link => ({
+    ...link,
+    url: createDynamicLink(link, session)
+  }));
+
   // เรียงลำดับให้รายการโปรดขึ้นก่อน
-  return filtered.sort((a, b) => {
+  return linksWithDynamicUrls.sort((a, b) => {
     const aIsFavorite = favorites.includes(a.id);
     const bIsFavorite = favorites.includes(b.id);
 
