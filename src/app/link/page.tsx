@@ -12,15 +12,17 @@ import FilterCard from './components/FilterCard';
 import LinkCard from './components/LinkCard';
 import ViewModeToggle from './components/ViewModeToggle';
 import Loading from '@/components/Loading';
+import { useSession } from 'next-auth/react';
 
 const LinkPage: React.FC = () => {
     const { data: linkData, isLoading, error } = trpc.protected.getLink.useQuery({ limit: 50 });
     const { filters, handleFilterChange, clearFilters, isSessionLoading } = useFilters();
     const [searchTerm, setSearchTerm] = useState('');
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
+    const { data: session, status: sessionStatus } = useSession();
 
     const filteredLinks = useMemo(() =>
-        filterLinks(linkData || [], searchTerm, filters),
+        filterLinks(linkData || [], searchTerm, filters, session),
         [linkData, searchTerm, filters]
     );
 
