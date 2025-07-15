@@ -67,7 +67,7 @@ const LinkCard: React.FC<LinkCardProps> = ({ link, viewMode }) => {
                         <span className="truncate">{link.url}</span>
                     </div>
 
-                    <LinkInfo link={link} />
+                    {/* <LinkInfo link={link} /> */}
                 </div>
             </div>
         </div>
