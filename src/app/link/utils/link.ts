@@ -12,39 +12,29 @@ export const isPublicLink = (link: LinkInterface): boolean => {
 
 export const createDynamicLink = (link: LinkInterface, session: Session | null): string => {
   if (!session?.user || !link.url) return link.url || '';
-  
+
+  const sanitize = (value: unknown): string | undefined =>
+    typeof value === 'string' ? value : undefined;
+
+  const placeholders: Record<string, string | undefined> = {
+    '{{NONTRI}}': sanitize(session.user.id),
+    '{{CAMPUS}}': sanitize(session.user.campus),
+    '{{TYPE}}': sanitize(session.user.type_persion),
+    '{{FACULTY}}': sanitize(session.user.faculty_id),
+    '{{MAJOR}}': sanitize(session.user.major_id),
+    '{{O365}}': sanitize(session.user.o365),
+    '{{GOOGLE}}': sanitize(session.user.google),
+  };
+
   let dynamicUrl = link.url;
-  
-  if (dynamicUrl.includes('{{NONTRI}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{NONTRI\}\}/g, session.user.id);
-  }
-  
-  if (dynamicUrl.includes('{{CAMPUS}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{CAMPUS\}\}/g, session.user.campus);
-  }
-  
-  if (dynamicUrl.includes('{{TYPE}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{TYPE\}\}/g, session.user.type_persion);
-  }
-  
-  if (dynamicUrl.includes('{{FACULTY}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{FACULTY\}\}/g, session.user.faculty_id || "");
-  }
-  
-  if (dynamicUrl.includes('{{MAJOR}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{MAJOR\}\}/g, session.user.major_id || "");
-  }
 
-  if (dynamicUrl.includes('{{O365}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{O365\}\}/g, session.user.o365 || "");
-  }
-
-  if (dynamicUrl.includes('{{GOOGLE}}')) {
-    dynamicUrl = dynamicUrl.replace(/\{\{GOOGLE\}\}/g, session.user.google || "");
+  for (const [key, value] of Object.entries(placeholders)) {
+    dynamicUrl = dynamicUrl.replace(new RegExp(key, 'g'), value || '');
   }
 
   return dynamicUrl;
 };
+
 
 export const getFilterOptions = (links: LinkInterface[]) => {
   if (!links || links.length === 0) return { campuses: [], typePersons: [] };
