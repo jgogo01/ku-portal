@@ -4,7 +4,7 @@ import { LinkInterface } from '@/interfaces/Link';
 import { getFavorites } from '@/app/link/utils/favorites';
 import { isPublicLink } from '@/app/link/utils/link';
 import { useFavoriteActions } from '@/app/link/hooks/useFavoriteActions';
-import LinkInfo from '@/app/link/components/LinkInfo';
+// import LinkInfo from '@/app/link/components/LinkInfo';
 import Link from 'next/link';
 
 interface FavoriteLinksCardProps {
@@ -125,15 +125,15 @@ const FavoriteLinksCard: React.FC<FavoriteLinksCardProps> = ({ links }) => {
                                     </div>
 
                                     {/* Link URL */}
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <div className="text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1 text-sm break-all transition-colors">
                                             <ExternalLink className="w-3 h-3 flex-shrink-0" />
                                             <span className="truncate">{link.url}</span>
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     {/* Link Info - ใช้ component เดิม */}
-                                    <LinkInfo link={link} />
+                                    {/* <LinkInfo link={link} /> */}
                                 </div>
                             </div>
                         ))}
