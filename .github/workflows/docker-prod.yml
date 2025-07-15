@@ -45,6 +45,8 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT=https://alllogin.ku.ac.th/realms/KU-Alllogin/protocol/openid-connect/logout
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/ku-portal:latest
             ${{ secrets.DOCKER_USERNAME }}/ku-portal:${{ steps.tag_version.outputs.new_tag }}

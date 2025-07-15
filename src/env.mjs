@@ -15,10 +15,11 @@ export const env = createEnv({
     KU_ALL_AUTH_ENDPOINT: z.url(),
     KU_ALL_TOKEN_ENDPOINT: z.url(),
     KU_ALL_USERINFO_ENDPOINT: z.url(),
-    KU_ALL_END_SESSION_ENDPOINT: z.url(),
     KU_ALL_WELL_KNOWN_URI: z.url(),
   },
-  client: {},
+  client: {
+    NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT: z.url(),
+  },
   runtimeEnv: {
     DIRECTUS_HOST: process.env.DIRECTUS_HOST,
     DIRECTUS_API_KEY: process.env.DIRECTUS_API_KEY,
@@ -30,7 +31,7 @@ export const env = createEnv({
     KU_ALL_AUTH_ENDPOINT: process.env.KU_ALL_AUTH_ENDPOINT,
     KU_ALL_TOKEN_ENDPOINT: process.env.KU_ALL_TOKEN_ENDPOINT,
     KU_ALL_USERINFO_ENDPOINT: process.env.KU_ALL_USERINFO_ENDPOINT,
-    KU_ALL_END_SESSION_ENDPOINT: process.env.KU_ALL_END_SESSION_ENDPOINT,
+    NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT: process.env.NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT,
     KU_ALL_WELL_KNOWN_URI: process.env.KU_ALL_WELL_KNOWN_URI,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
