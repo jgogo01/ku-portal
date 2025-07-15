@@ -62,10 +62,10 @@ const LinkCard: React.FC<LinkCardProps> = ({ link, viewMode }) => {
                         </div>
                     </div>
 
-                    <div className="text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1 mb-3 break-all transition-colors">
+                    {/* <div className="text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1 mb-3 break-all transition-colors">
                         <ExternalLink className="w-4 h-4 flex-shrink-0" />
                         <span className="truncate">{link.url}</span>
-                    </div>
+                    </div> */}
 
                     {/* <LinkInfo link={link} /> */}
                 </div>
