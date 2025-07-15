@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { redirect, useRouter } from "next/navigation";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { menuItems } from "@/config/route";
 import { env } from "@/env.mjs";
 
@@ -53,7 +53,7 @@ export const useNavbar = (isAuth: boolean = false) => {
     }
 
     const logoutUrl = new URL(env.NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT);
-    
+
     if (session.user.id_token) {
       logoutUrl.searchParams.set('id_token_hint', session.user.id_token);
       logoutUrl.searchParams.set('post_logout_redirect_uri', window.location.origin + '/logout');

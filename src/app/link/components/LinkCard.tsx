@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Globe, Heart } from 'lucide-react';
+import { Globe, Heart } from 'lucide-react';
 import { ViewMode } from '../types/link';
 import { LinkInterface } from '@/interfaces/Link';
 import { isPublicLink } from '../utils/link';
