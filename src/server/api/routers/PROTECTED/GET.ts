@@ -71,7 +71,7 @@ export const getLink = protectedProcedure
     } catch (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
-        message: "Unable to retrieve news articles. Please try again later.",
+        message: "Unable to retrieve link. Please try again later.",
         cause: error,
       });
     }

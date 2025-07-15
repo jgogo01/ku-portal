@@ -8,7 +8,7 @@ interface MobileMenuProps {
     setIsMobileMenuOpen: (open: boolean) => void;
     mobileMenuRef: React.RefObject<HTMLDivElement | null>;
     filteredMenuItems: MenuItem[];
-    handleNavigation: (href: string) => void;
+    handleNavigation: (href: string, newTab?: boolean) => void;
     isAuthenticated: boolean;
 }
 
@@ -41,7 +41,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                         return (
                             <button
                                 key={item.name}
-                                onClick={() => handleNavigation(item.href)}
+                                onClick={() => handleNavigation(item.href, item.newTab || false)}
                                 className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
                             >
                                 <IconComponent size={16} />

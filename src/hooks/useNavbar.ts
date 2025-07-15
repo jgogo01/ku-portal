@@ -62,8 +62,12 @@ export const useNavbar = (isAuth: boolean = false) => {
     redirect(logoutUrl.toString());
   };
 
-  const handleNavigation = (href: string) => {
-    router.push(href);
+  const handleNavigation = (href: string, newTab?: boolean) => {
+    if (newTab) {
+      window.open(href, '_blank');
+    } else {
+      router.push(href);
+    }
     setIsMobileMenuOpen(false);
   };
 

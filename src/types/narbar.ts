@@ -7,4 +7,5 @@ export default interface MenuItem {
   href: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   requireAuth: boolean;
+  newTab?: boolean;
 }

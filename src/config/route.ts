@@ -44,14 +44,16 @@ export const menuItems: MenuItem[] = [
   },
   {
     name: 'กำลังใช้งานอยู่',
-    href: env.NEXT_PUBLIC_KU_ALL_ACT_APPCATION_URL,
+    href: env.NEXT_PUBLIC_KU_ALL_ACT_APPCATION_URL || "",
     icon: Play,
-    requireAuth: true
+    requireAuth: true,
+    newTab: true
   },
   {
     name: 'ประวัติการใช้งาน',
-    href: env.NEXT_PUBLIC_KU_ALL_ACT_LOGIN_AUDIT_CLIENT_ID,
+    href: env.NEXT_PUBLIC_KU_ALL_ACT_LOGIN_AUDIT_CLIENT_ID || "",
     icon: ShieldUser,
-    requireAuth: true
+    requireAuth: true,
+    newTab: true
   }
 ];

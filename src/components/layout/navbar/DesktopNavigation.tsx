@@ -3,7 +3,7 @@ import MenuItem from '@/types/narbar';
 
 interface DesktopNavigationProps {
   filteredMenuItems: MenuItem[];
-  handleNavigation: (href: string) => void;
+  handleNavigation: (href: string, newTab: boolean) => void;
 }
 
 export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
@@ -17,7 +17,7 @@ export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
         return (
           <button
             key={item.name}
-            onClick={() => handleNavigation(item.href)}
+            onClick={() => handleNavigation(item.href, item.newTab || false)}
             className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
           >
             <IconComponent size={16} />
