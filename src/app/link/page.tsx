@@ -19,7 +19,7 @@ const LinkPage: React.FC = () => {
     const { filters, handleFilterChange, clearFilters, isSessionLoading } = useFilters();
     const [searchTerm, setSearchTerm] = useState('');
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
-    const { data: session, status: sessionStatus } = useSession();
+    const { data: session } = useSession();
 
     const filteredLinks = useMemo(() =>
         filterLinks(linkData || [], searchTerm, filters, session),
