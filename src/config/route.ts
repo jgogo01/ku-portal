@@ -1,6 +1,6 @@
 import MenuItem from '@/types/narbar';
-import { Home, Link, Newspaper } from 'lucide-react';
-
+import { Home, Link, Newspaper, Play, ShieldUser } from 'lucide-react';
+import { env } from '@/env.mjs';
 export const protectedRoutes = [
   '/link',
 ];
@@ -40,6 +40,18 @@ export const menuItems: MenuItem[] = [
     name: 'ลิงก์ทั้งหมด',
     href: '/link',
     icon: Link,
+    requireAuth: true
+  },
+  {
+    name: 'กำลังใช้งานอยู่',
+    href: env.NEXT_PUBLIC_KU_ALL_ACT_APPCATION_URL,
+    icon: Play,
+    requireAuth: true
+  },
+  {
+    name: 'ประวัติการใช้งาน',
+    href: env.NEXT_PUBLIC_KU_ALL_ACT_LOGIN_AUDIT_CLIENT_ID,
+    icon: ShieldUser,
     requireAuth: true
   }
 ];

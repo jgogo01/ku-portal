@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth/";
 import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { KuAllLoginProfile } from "@/types/KuAllLoginPorfile";
+import { KuAllCallback } from "@/types/KuAllCallback";
 import { env } from "@/env.mjs";
 
 export const authOptions: NextAuthOptions = {
@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
       id: "kualllogin",
       name: "KU All Login",
       type: "oauth",
+      idToken: true,
       authorization: {
         url: env.KU_ALL_AUTH_ENDPOINT,
         params: { scope: "basic openid" },
@@ -36,7 +37,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["pkce", "state"],
       wellKnown: env.KU_ALL_WELL_KNOWN_URI,
 
-      async profile(profile: KuAllLoginProfile) {
+      async profile(profile: KuAllCallback) {
         return {
           id: profile.userprincipalname,
           thainame: profile.thainame,
@@ -53,7 +54,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.thainame = user.thainame;
@@ -65,11 +66,15 @@ export const authOptions: NextAuthOptions = {
         token.google = user.google || null;
         token.mail = user.mail || null;
       }
+      if (account?.provider === "kualllogin" && account.id_token) {
+        token.id_token = account.id_token;
+      }
       return token;
     },
 
     async session({ session, token }: { session: Session; token: JWT }) {
       session.user.id = token.id;
+      session.user.id_token = token.id_token || undefined;
       session.user.thainame = token.thainame;
       session.user.type_persion = token.type_persion;
       session.user.campus = token.campus;

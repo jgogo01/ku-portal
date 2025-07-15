@@ -5,6 +5,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      id_token?: string; // OAuth2 ID Token
       thainame: string;
       type_persion: string;
       campus: string;
@@ -36,6 +37,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT extends DefaultJWT {
     id: string;
+    id_token?: string; // OAuth2 ID Token
     thainame: string;
     type_persion: string;
     campus: string;

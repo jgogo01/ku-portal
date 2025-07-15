@@ -1,4 +1,4 @@
-export interface KuAllLoginProfile {
+export interface KuAllCallback {
   thainame: string;
   "first-name": string;
   "last-name": string;
