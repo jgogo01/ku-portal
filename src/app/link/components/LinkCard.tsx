@@ -5,7 +5,7 @@ import { LinkInterface } from '@/interfaces/Link';
 import { isPublicLink } from '../utils/link';
 import { useFavorites } from '../hooks/useFavorites';
 import { useFavoriteActions } from '../hooks/useFavoriteActions';
-import LinkInfo from './LinkInfo';
+//import LinkInfo from './LinkInfo';
 
 interface LinkCardProps {
     link: LinkInterface;
