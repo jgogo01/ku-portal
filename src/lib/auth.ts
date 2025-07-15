@@ -30,6 +30,7 @@ export const authOptions: NextAuthOptions = {
       userinfo: {
         url: env.KU_ALL_USERINFO_ENDPOINT,
       },
+      
       clientId: env.KU_ALL_CLIENT_ID,
       clientSecret: env.KU_ALL_CLIENT_SECRET,
       checks: ["pkce", "state"],

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { menuItems } from "@/config/route";
+import { env } from "@/env.mjs";
 
 export const useNavbar = (isAuth: boolean = false) => {
   const router = useRouter();
@@ -47,7 +48,10 @@ export const useNavbar = (isAuth: boolean = false) => {
   }, []);
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/" });
+    await signOut({ 
+      redirect: false 
+    });
+    window.location.href = `${env.KU_ALL_END_SESSION_ENDPOINT}?post_logout_redirect_uri=${encodeURIComponent(env.NEXTAUTH_URL)}`;
   };
 
   const handleNavigation = (href: string) => {
