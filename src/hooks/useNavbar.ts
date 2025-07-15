@@ -48,8 +48,18 @@ export const useNavbar = (isAuth: boolean = false) => {
   }, []);
 
   const handleLogout = async () => {
-    await signOut();
-    redirect(env.NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT);
+    if (!session?.user?.id) {
+      return;
+    }
+
+    const logoutUrl = new URL(env.NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT);
+    
+    if (session.user.id_token) {
+      logoutUrl.searchParams.set('id_token_hint', session.user.id_token);
+      logoutUrl.searchParams.set('post_logout_redirect_uri', window.location.origin + '/logout');
+    }
+
+    redirect(logoutUrl.toString());
   };
 
   const handleNavigation = (href: string) => {
