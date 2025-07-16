@@ -1,5 +1,5 @@
 import MenuItem from '@/types/narbar';
-import { Home, Link, Newspaper, Play, ShieldUser } from 'lucide-react';
+import { Home, Link, Newspaper, Play } from 'lucide-react';
 import { env } from '@/env.mjs';
 export const protectedRoutes = [
   '/link',
