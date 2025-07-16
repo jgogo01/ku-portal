@@ -47,8 +47,7 @@ jobs:
           push: true
           build-args: |
             NEXT_PUBLIC_KU_ALL_END_SESSION_ENDPOINT=https://alllogin.ku.ac.th/realms/KU-Alllogin/protocol/openid-connect/logout
-            NEXT_PUBLIC_KU_ALL_ACT_APPCATION_URL=https://alllogin.ku.ac.th/realms/KU-Alllogin/account/applications
-            NEXT_PUBLIC_KU_ALL_ACT_LOGIN_AUDIT_CLIENT_ID=https://alllogin.ku.ac.th/realms/KU-Alllogin/account/account-security/device-activity
+            NEXT_PUBLIC_KU_ALL_ACT_APPCATION_URL=https://alllogin.ku.ac.th/realms/KU-Alllogin/account/account-security/device-activity
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/ku-portal:latest
             ${{ secrets.DOCKER_USERNAME }}/ku-portal:${{ steps.tag_version.outputs.new_tag }}

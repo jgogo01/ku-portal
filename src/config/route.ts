@@ -48,12 +48,5 @@ export const menuItems: MenuItem[] = [
     icon: Play,
     requireAuth: true,
     newTab: true
-  },
-  {
-    name: 'ประวัติการใช้งาน',
-    href: env.NEXT_PUBLIC_KU_ALL_ACT_LOGIN_AUDIT_CLIENT_ID || "",
-    icon: ShieldUser,
-    requireAuth: true,
-    newTab: true
   }
 ];
